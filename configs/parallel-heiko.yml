@@ -1,0 +1,11 @@
+endpoint: wss://heiko-rpc.parallel.fi
+mock-signature-host: true
+
+import-storage:
+  System:
+    Account:
+      -
+        -
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
+        - data:
+            free: 1000000000000000
