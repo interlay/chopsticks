@@ -1,0 +1,25 @@
+endpoint: wss://api-kusama.interlay.io/parachain
+mock-signature-host: true
+# block: 2478014
+# db: ./db.sqlite
+# wasm-override: kintsugi-1.21.x.wasm
+
+# tokens: https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8000#/extrinsics/decode/0x15002c5d0110d8bad027b5fecd005634d36507e6f012ffa3557d6c5a2c6a5b498e26000ced01
+# xcm: https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8000#/extrinsics/decode/0x5e00000b00e40b54020000000000000000000000010102009520010034b83f611d47a5acf4c641b0ee86d746ffca91e1bb616a00a0f43e96184313780008d6e829000000
+# xcm: https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8001#/extrinsics/decode/0x2b007900000000e40b5402000000000000000000000001010200b120010034b83f611d47a5acf4c641b0ee86d746ffca91e1bb616a00a0f43e961843137800
+
+import-storage:
+  # Sudo:
+  #   Key: 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
+  Tokens:
+    Accounts:
+      -
+        -
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
+          - token: KINT
+        - free: 500000000000000
+      -
+        -
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
+          - token: KBTC
+        - free: 500000000000000
