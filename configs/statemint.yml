@@ -1,4 +1,4 @@
-endpoint: wss://statemine-rpc.polkadot.io
+endpoint: wss://statemint-rpc.polkadot.io
 mock-signature-host: true
 
 import-storage:
@@ -6,7 +6,7 @@ import-storage:
     Account:
       -
         -
-          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # # Alice, dot
         - data:
             free: 1000000000000000
   Assets:
