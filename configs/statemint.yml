@@ -6,13 +6,13 @@ import-storage:
     Account:
       -
         -
-          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # # Alice, dot
         - data:
             free: 1000000000000000
   Assets:
     Account:
       -
         -
-          - 1984
+          - 1984 # Alice, usdt
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
         - balance: 9300000

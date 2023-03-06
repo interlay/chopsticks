@@ -1,8 +1,8 @@
 endpoint: wss://api.interlay.io/parachain
 mock-signature-host: true
 # block: 2478014
-db: ./db.sqlite
-wasm-override: interlay-1.21.x.wasm
+# db: ./db.sqlite
+# wasm-override: interlay-0.9.38.wasm
 # https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8000#/extrinsics/decode/0x15002c5d0110d8bad027b5fecd005634d36507e6f012ffa3557d6c5a2c6a5b498e26000ced01
 
 
@@ -16,3 +16,29 @@ import-storage:
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
           - token: INTR
         - free: 500000000000000
+      -
+        -
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice, usdt
+          - foreignAsset: 2
+        - free: 500000000000000
+  # VaultRegistry:
+  #   $removePrefix:
+  #     - Vaults
+  # VaultRewards:
+  #   $removePrefix:
+  #     - RewardPerToken
+  #     - RewardTally
+  #     - Stake
+  #     - TotalRewards
+  #     - TotalStake
+  # VaultStaking:
+  #   $removePrefix:
+  #     - RewardPerToken
+  #     - RewardTally
+  #     - Stake
+  #     - TotalRewards
+  #     - TotalStake
+  #     - Nonce
+  #     - TotalStake
+  #     - SlashPerToken
+  #     - SlashTally
