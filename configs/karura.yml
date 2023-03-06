@@ -1,6 +1,7 @@
 endpoint: wss://karura-rpc.dwellir.com
 mock-signature-host: true
 block: ${env.KARURA_BLOCK_NUMBER}
+
 db: ./db.sqlite
 # wasm-override: karura-2100.wasm
 
@@ -25,4 +26,9 @@ import-storage:
         -
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
           - token: KSM
+        - free: '10000000000000000000'
+      -
+        -
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
+          - token: LKSM
         - free: '10000000000000000000'
