@@ -18,6 +18,11 @@ import-storage:
         - free: 500000000000000
       -
         -
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
+          - token: DOT
+        - free: 500000000000000
+      -
+        -
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice, usdt
           - foreignAsset: 2
         - free: 500000000000000

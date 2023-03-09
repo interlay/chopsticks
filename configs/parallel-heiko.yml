@@ -8,4 +8,16 @@ import-storage:
         -
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
         - data:
-            free: 1000000000000000
+            free: '1000000000000000'
+  Assets:
+    Account:
+      -
+        -
+          - 121 # KBTC
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
+        - balance: '1000000000000000'
+      -
+        -
+          - 119 # KINT
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
+        - balance: '1000000000000000'
