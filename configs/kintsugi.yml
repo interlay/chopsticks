@@ -31,3 +31,8 @@ import-storage:
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
           - ForeignAsset: 2 # LKSM
         - free: '10000000000000000000'
+      -
+        -
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
+          - ForeignAsset: 5 # VKSM
+        - free: '10000000000000000000'
