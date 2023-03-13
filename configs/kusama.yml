@@ -11,6 +11,9 @@ import-storage:
             free: '10000000000000000000'
   Council:
     Members: [5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY]
+  ParasDisputes:
+    $removePrefix:
+      - Disputes
   PhragmenElection:
     Members:
       - who: 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
