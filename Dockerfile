@@ -12,4 +12,4 @@ RUN . "$HOME/.cargo/env" && \
     yarn && \
     yarn build-wasm
 
-ENTRYPOINT [ "tini", "yarn", "start", "xcm" ]
+ENTRYPOINT [ "tini", "--", "yarn", "start", "xcm" ]
