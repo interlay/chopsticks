@@ -10,14 +10,19 @@ import-storage:
         -
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
           - token: INTR
-        - free: 500000000000000
+        - free: '500000000000000'
+      -
+        -
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
+          - token: IBTC
+        - free: '10000000000'
       -
         -
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
           - token: DOT
-        - free: 500000000000000
+        - free: '500000000000000'
       -
         -
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice, usdt
           - foreignAsset: 2
-        - free: 500000000000000
+        - free: '500000000000000'
