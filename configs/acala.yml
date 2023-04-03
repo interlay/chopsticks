@@ -13,16 +13,26 @@ import-storage:
         -
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
         - data:
-            free: 1000000000000000
+            free: '1000000000000000'
   Tokens:
     Accounts:
       -
         -
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
           - token: AUSD
-        - free: 1000000000000000
+        - free: '1000000000000000'
       -
         -
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
           - token: DOT
-        - free: 1000000000000000
+        - free: '1000000000000000'
+      -
+        -
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
+          - foreignAsset: 4 # INTR
+        - free: '500000000000000'
+      -
+        -
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
+          - foreignAsset: 3 # IBTC
+        - free: '10000000000'
