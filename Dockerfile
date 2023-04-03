@@ -9,7 +9,7 @@ WORKDIR /app
 COPY . .
 RUN . "$HOME/.cargo/env" && \
     cargo --help && \
-    yarn && \
+    yarn --silent && \
     yarn build-wasm
 
 ENTRYPOINT [ "tini", "--", "yarn", "start", "xcm" ]

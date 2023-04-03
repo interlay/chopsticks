@@ -30,6 +30,8 @@ jobs:
         with:
           images: ghcr.io/interlay/chopsticks
           tags: |
+            type=ref,event=branch
+            type=ref,event=tag
             type=sha,prefix={{branch}}-
 
       - name: Set up QEMU
