@@ -15,7 +15,7 @@ You can run a test node with config with `yarn dlx @acala-network/chopsticks dev
 Make sure you have setup Rust environment (>= 1.64).
 
 - Clone repository with submodules ([smoldot](https://github.com/paritytech/smoldot))
-  - `git clone --recurse-submodules https://github.com/AcalaNetwork/chopsticks.git && cd chopsticks`
+  - `git clone --recurse-submodules https://github.com/interlay/chopsticks.git && cd chopsticks`
 - Install deps
   - `yarn`
 - Build wasm
