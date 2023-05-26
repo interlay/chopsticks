@@ -7,7 +7,8 @@ import-storage:
       -
         -
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # # Alice, dot
-        - data:
+        - providers: 1
+          data:
             free: 1000000000000000
   Assets:
     Account:
