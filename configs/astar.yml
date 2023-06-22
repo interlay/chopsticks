@@ -1,4 +1,6 @@
-endpoint: wss://rpc.astar.network
+endpoint:
+  - wss://rpc.astar.network
+  - wss://astar-rpc.dwellir.com
 mock-signature-host: true
 
 import-storage:
