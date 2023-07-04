@@ -10,7 +10,7 @@ import { Block, TaskCallResponse } from './block'
 import { GenericExtrinsic } from '@polkadot/types'
 import { HexString } from '@polkadot/util/types'
 import { StorageLayer, StorageValueKind } from './storage-layer'
-import { compactAddLength, hexToU8a, stringToHex } from '@polkadot/util'
+import { compactAddLength, hexToU8a, stringToHex, u8aConcat } from '@polkadot/util'
 import { compactHex } from '../utils'
 import { defaultLogger, truncate } from '../logger'
 import { getCurrentSlot } from '../utils/time-travel'
@@ -151,43 +151,95 @@ export const buildBlock = async (
   const registry = await head.registry
   const header = await newHeader(head)
 
+  logger.info(
+    {
+      number: head.number + 1,
+      extrinsicsCount: extrinsics.length,
+      umpCount: Object.keys(ump).length,
+    },
+    `Try building block #${(head.number + 1).toLocaleString()}`
+  )
+
   let layer: StorageLayer | undefined
   // apply ump via storage override hack
   if (Object.keys(ump).length > 0) {
     const meta = await head.meta
     layer = new StorageLayer(head.storage)
     for (const [paraId, upwardMessages] of Object.entries(ump)) {
-      const queueSize = meta.registry.createType('(u32, u32)', [
-        upwardMessages.length,
-        upwardMessages.map((x) => x.length).reduce((s, i) => s + i, 0),
-      ])
+      const upwardMessagesU8a = upwardMessages.map((x) => hexToU8a(x))
+      const messagesCount = upwardMessages.length
+      const messagesSize = upwardMessagesU8a.map((x) => x.length).reduce((s, i) => s + i, 0)
 
-      const messages = meta.registry.createType('Vec<Bytes>', upwardMessages)
+      if (meta.query.ump) {
+        const queueSize = meta.registry.createType('(u32, u32)', [messagesCount, messagesSize])
 
-      // TODO: make sure we append instead of replace
-      layer.setAll([
-        [compactHex(meta.query.ump.relayDispatchQueues(paraId)), messages.toHex()],
-        [compactHex(meta.query.ump.relayDispatchQueueSize(paraId)), queueSize.toHex()],
-      ])
+        const messages = meta.registry.createType('Vec<Bytes>', upwardMessages)
+
+        // TODO: make sure we append instead of replace
+        layer.setAll([
+          [compactHex(meta.query.ump.relayDispatchQueues(paraId)), messages.toHex()],
+          [compactHex(meta.query.ump.relayDispatchQueueSize(paraId)), queueSize.toHex()],
+        ])
+      } else if (meta.query.messageQueue) {
+        // TODO: make sure we append instead of replace
+        const origin = { ump: { para: paraId } }
+
+        let last = 0
+        let heap = new Uint8Array(0)
+
+        for (const message of upwardMessagesU8a) {
+          const payloadLen = message.length
+          const header = meta.registry.createType('(u32, bool)', [payloadLen, false])
+          last = heap.length
+          heap = u8aConcat(heap, header.toU8a(), message)
+        }
+
+        layer.setAll([
+          [
+            compactHex(meta.query.messageQueue.bookStateFor(origin)),
+            meta.registry
+              .createType('PalletMessageQueueBookState', {
+                begin: 0,
+                end: 1,
+                count: 1,
+                readyNeighbours: { prev: origin, next: origin },
+                messageCount: messagesCount,
+                size_: messagesSize,
+              })
+              .toHex(),
+          ],
+          [
+            compactHex(meta.query.messageQueue.serviceHead(origin)),
+            meta.registry.createType('PolkadotRuntimeParachainsInclusionAggregateMessageOrigin', origin).toHex(),
+          ],
+          [
+            compactHex(meta.query.messageQueue.pages(origin, 0)),
+            meta.registry
+              .createType('PalletMessageQueuePage', {
+                remaining: messagesCount,
+                remaining_size: messagesSize,
+                first_index: 0,
+                first: 0,
+                last,
+                heap: compactAddLength(heap),
+              })
+              .toHex(),
+          ],
+        ])
+      } else {
+        throw new Error('Unknown ump storage')
+      }
 
       logger.trace({ paraId, upwardMessages: truncate(upwardMessages) }, 'Pushed UMP')
     }
 
-    const needsDispatch = meta.registry.createType('Vec<u32>', Object.keys(ump))
-    layer.set(compactHex(meta.query.ump.needsDispatch()), needsDispatch.toHex())
+    if (meta.query.ump) {
+      const needsDispatch = meta.registry.createType('Vec<u32>', Object.keys(ump))
+      layer.set(compactHex(meta.query.ump.needsDispatch()), needsDispatch.toHex())
+    }
   }
 
   const { block: newBlock } = await initNewBlock(head, header, inherents, layer)
-
-  logger.info(
-    {
-      number: newBlock.number,
-      extrinsicsCount: extrinsics.length,
-      umpCount: Object.keys(ump).length,
-      tempHash: newBlock.hash,
-    },
-    `Try building block #${newBlock.number.toLocaleString()}`
-  )
 
   const pendingExtrinsics: HexString[] = []
   const includedExtrinsic: HexString[] = []

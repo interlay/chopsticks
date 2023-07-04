@@ -1,6 +1,6 @@
 {
 	"name": "@acala-network/chopsticks-testing",
-	"version": "0.6.0",
+	"version": "0.6.6",
 	"author": "Bryan Chen <xlchen1291@gmail.com>",
 	"license": "Apache-2.0",
 	"scripts": {
@@ -8,14 +8,14 @@
 		"build": "tsc -p ./tsconfig.json"
 	},
 	"dependencies": {
-		"@acala-network/chopsticks": "^0.6.0"
+		"@acala-network/chopsticks": "workspace:*"
 	},
 	"peerDependencies": {
-		"vitest": "^0.29.2"
+		"vitest": "^0.30.1"
 	},
 	"devDependencies": {
-		"@types/chai": "^4.3.4",
-		"typescript": "^5.0.3"
+		"@types/chai": "^4.3.5",
+		"typescript": "^5.1.6"
 	},
 	"files": [
 		"lib"

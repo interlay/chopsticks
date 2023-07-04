@@ -1,7 +1,6 @@
 import { ApiPromise, WsProvider } from '@polkadot/api'
 import { Codec } from '@polkadot/types/types'
 import { HexString } from '@polkadot/util/types'
-import { Keyring } from '@polkadot/keyring'
 import { beforeAll, beforeEach, expect, vi } from 'vitest'
 
 import { Api } from '@acala-network/chopsticks'
@@ -21,7 +20,7 @@ import { createServer } from '@acala-network/chopsticks/server'
 import { defer } from '@acala-network/chopsticks/utils'
 import { handler } from '@acala-network/chopsticks/rpc'
 
-export { expectJson, expectHex, expectHuman } from '@acala-network/chopsticks-testing'
+export { expectJson, expectHex, testingPairs } from '@acala-network/chopsticks-testing'
 
 export type SetupOption = {
   endpoint?: string
@@ -32,16 +31,18 @@ export type SetupOption = {
 }
 
 export const env = {
-  mandala: {
-    endpoint: 'wss://mandala-rpc.aca-staging.network/ws',
-    blockHash: '0x062327512615cd62ea8c57652a04a6c937b112f1410520d83e2fafb9776cdbe1' as HexString,
+  acala: {
+    endpoint: 'wss://acala-rpc-0.aca-api.network',
+    // 3,800,000
+    blockHash: '0x0df086f32a9c3399f7fa158d3d77a1790830bd309134c5853718141c969299c7' as HexString,
   },
   rococo: {
     endpoint: 'wss://rococo-rpc.polkadot.io',
     blockHash: '0xd7fef00504decd41d5d2e9a04346f6bc639fd428083e3ca941f636a8f88d456a' as HexString,
   },
   mandalaGenesis: {
-    genesis: 'https://raw.githubusercontent.com/AcalaNetwork/Acala/master/resources/mandala-dist.json',
+    genesis:
+      'https://raw.githubusercontent.com/AcalaNetwork/Acala/2c43dbbb380136f2c35bd0db08b286f346b71d61/resources/mandala-dist.json',
   },
 }
 
@@ -178,26 +179,5 @@ export const mockCallback = () => {
 }
 
 export const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
-
-export const testingPairs = (ss58Format?: number) => {
-  const keyring = new Keyring({ type: 'ed25519', ss58Format }) // cannot use sr25519 as it is non determinstic
-  const alice = keyring.addFromUri('//Alice')
-  const bob = keyring.addFromUri('//Bob')
-  const charlie = keyring.addFromUri('//Charlie')
-  const dave = keyring.addFromUri('//Dave')
-  const eve = keyring.addFromUri('//Eve')
-  const test1 = keyring.addFromUri('//test1')
-  const test2 = keyring.addFromUri('//test2')
-  return {
-    alice,
-    bob,
-    charlie,
-    dave,
-    eve,
-    test1,
-    test2,
-    keyring,
-  }
-}
 
 export { defer }

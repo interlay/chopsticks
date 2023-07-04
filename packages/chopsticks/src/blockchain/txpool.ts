@@ -44,7 +44,7 @@ export class TxPool {
   readonly #dmp: DownwardMessage[] = []
   readonly #hrmp: Record<number, HorizontalMessage[]> = {}
 
-  readonly #mode: BuildBlockMode
+  #mode: BuildBlockMode
   readonly #inherentProvider: InherentProvider
   readonly #pendingBlocks: { params: BuildBlockParams; deferred: Deferred<void> }[] = []
 
@@ -72,6 +72,14 @@ export class TxPool {
 
   get hrmp(): Record<number, HorizontalMessage[]> {
     return this.#hrmp
+  }
+
+  get mode(): BuildBlockMode {
+    return this.#mode
+  }
+
+  set mode(mode: BuildBlockMode) {
+    this.#mode = mode
   }
 
   clear() {
@@ -198,8 +206,8 @@ export class TxPool {
       await this.#buildBlock()
     } finally {
       this.#isBuilding = false
-      this.#buildBlockIfNeeded()
     }
+    this.#buildBlockIfNeeded()
   }
 
   async #buildBlock() {
