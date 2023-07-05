@@ -1,8 +1,8 @@
-endpoint: wss://mandala-tc9-rpc.aca-staging.network
+endpoint: wss://parachain.polkadex.trade
 mock-signature-host: true
-block: ${env.MANDALA_BLOCK_NUMBER}
+block: ${env.POLKADEX_BLOCK_NUMBER}
 db: ./db.sqlite
-# wasm-override: acala-2101.wasm
+# wasm-override: parachain_polkadex_runtime.compact.compressed.wasm
 
 import-storage:
   Sudo:
@@ -15,10 +15,3 @@ import-storage:
         - providers: 1
           data:
             free: 1000000000000000
-  Tokens:
-    Accounts:
-      -
-        -
-          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
-          - token: AUSD
-        - free: 1000000000000000

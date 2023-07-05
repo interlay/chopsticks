@@ -49,9 +49,15 @@ describe('wasm', () => {
     expect(await getRuntimeVersion(getCode())).toMatchObject(expectedRuntimeVersion)
   })
 
-  it('calculate state root', async () => {
-    const a = await calculateStateRoot([['0x5301bf5ff0298f5c7b93a446709f8e885f772afdd0d8ba3d4d559a06f0742f12', '0x01']])
-    const b = await calculateStateRoot([['0x5301bf5ff0298f5c7b93a446709f8e885f772afdd0d8ba3d4d559a06f0742f12', '0x02']])
+  it.each([0, 1])('calculate state root', async (trie_version) => {
+    const a = await calculateStateRoot(
+      [['0x5301bf5ff0298f5c7b93a446709f8e885f772afdd0d8ba3d4d559a06f0742f12', '0x01']],
+      trie_version
+    )
+    const b = await calculateStateRoot(
+      [['0x5301bf5ff0298f5c7b93a446709f8e885f772afdd0d8ba3d4d559a06f0742f12', '0x02']],
+      trie_version
+    )
     expect(a).to.not.eq(b)
   })
 
@@ -121,7 +127,7 @@ describe('wasm', () => {
     expect(config.toJSON()).toMatchSnapshot()
 
     const goAhead = registry.createType('UpgradeGoAhead', 'GoAhead')
-    const { trieRootHash, nodes } = await createProof(ROOT_TRIE_HASH, NODES, [
+    const { trieRootHash, nodes } = await createProof(NODES, [
       [WELL_KNOWN_KEYS.ACTIVE_CONFIG, originalDecoded[WELL_KNOWN_KEYS.ACTIVE_CONFIG]],
       [WELL_KNOWN_KEYS.CURRENT_BLOCK_RANDOMNESS, originalDecoded[WELL_KNOWN_KEYS.CURRENT_BLOCK_RANDOMNESS]],
       [upgradeKey, goAhead.toHex()],
