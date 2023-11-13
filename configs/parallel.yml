@@ -1,4 +1,4 @@
-endpoint: wss://rpc.astar.network
+endpoint: wss://rpc.parallel.fi
 mock-signature-host: true
 
 import-storage:
@@ -9,16 +9,16 @@ import-storage:
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
         - providers: 1
           data:
-            free: '1000000000000000000000'
+            free: '1000000000000000'
   Assets:
     Account:
       -
         -
-          - '18446744073709551620' # IBTC
+          - 122 # IBTC
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
-        - balance: '10000000000'
+        - balance: '1000000000000000'
       -
         -
-          - '18446744073709551621' # INTR
+          - 120 # INTR
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
-        - balance: '500000000000000'
+        - balance: '1000000000000000'

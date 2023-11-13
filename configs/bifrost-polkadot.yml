@@ -1,4 +1,5 @@
-endpoint: wss://bifrost-rpc.dwellir.com
+endpoint: wss://hk.p.bifrost-rpc.liebi.com/ws
+# endpoint: wss://bifrost-polkadot.api.onfinality.io/public-ws
 mock-signature-host: true
 
 import-storage:
@@ -16,11 +17,11 @@ import-storage:
     Accounts:
       -
         -
-          - 5Eg2fnsjADUqvPPTJ17bGgphuxi754R7LsCCqPjt7M5MqVKB # sibl 2092 (kintsugi sov)
-          - vtoken: KSM #VKSM
-        - free: '10000000000000'
+          - 5Eg2fntQS1bgCgPtXQ9Ysip6RUQkQJEMZqZ9u9qX6fcnhB4H # sibl 2032 (interlay sov)
+          - vtoken2: 0 #VDOT
+        - free: '100000000000'
       -
         -
           - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY # Alice
-          - vtoken: KSM # VKSM
-        - free: '10000000000000000000'
+          - vtoken2: 0 # VDOT
+        - free: '100000000000000000'
