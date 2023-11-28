@@ -63,12 +63,13 @@ export interface WasmExecutor {
     },
     callback?: JsCallback,
   ) => Promise<TaskResponse>
+  testing: (callback: JsCallback, key: any) => Promise<any>
 }
 
 const logger = defaultLogger.child({ name: 'executor' })
 
 let __executor_worker: Promise<{ remote: Comlink.Remote<WasmExecutor>; terminate: () => Promise<void> }> | undefined
-const getWorker = async () => {
+export const getWorker = async () => {
   if (__executor_worker) return __executor_worker
 
   const isNode = typeof process !== 'undefined' && process?.versions?.node // true for node or bun
@@ -213,12 +214,10 @@ export const getAuraSlotDuration = _.memoize(async (wasm: HexString): Promise<nu
   return u8aToBn(hexToU8a(result.Call.result).subarray(0, 8 /* u64: 8 bytes */)).toNumber()
 })
 
-export const releaseWorker = async () => {
+export const destroyWorker = async () => {
   if (!__executor_worker) return
   const executor = await __executor_worker
   executor.remote[Comlink.releaseProxy]()
-  // this delay seems to fix hanging tests
-  // https://github.com/vitest-dev/vitest/issues/3077
   await new Promise((resolve) => setTimeout(resolve, 50))
   await executor.terminate()
   __executor_worker = undefined
